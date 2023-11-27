@@ -2,6 +2,7 @@
 #define Encoder_funcs_h
 
 #include <Arduino.h>
+#include <math.h>
 #include <Encoder.h>
 
 class Wheels
@@ -19,11 +20,14 @@ private:
     int leftA, leftB, rightA, rightB;
     long newLeft, newRight;
     long startLeft, startRight;
+
+    Encoder LeftEncoder;
+    Encoder RightEncoder;
     
-    const unsigned long deltaT; // sampling time period for speed in ms
+    unsigned long deltaT; // sampling time period for speed in ms
     unsigned long startTime;
-    const unsigned int countsperRev;    // same for L and R
-}
+    unsigned int countsperRev;    // same for L and R
+};
 
 
 
