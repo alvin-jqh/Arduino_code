@@ -13,11 +13,10 @@ public:
 
     void computeSpeeds(); // calculate speeds
     void startTimer();
-    float getLeftSpeed(int unit);
-    float getRightSpeed(int unit);
+    float getLeftSpeed(bool unit);
+    float getRightSpeed(bool unit);
 
 private:
-    void init(int leftA, int leftB, int rightA, int rightB);
 
     long newLeft, newRight;
     long startLeft, startRight;
