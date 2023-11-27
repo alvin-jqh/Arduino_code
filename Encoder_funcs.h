@@ -1,5 +1,5 @@
-#ifndef Encoder_funcs.h
-#define Encoder_funcs.h
+#ifndef Encoder_funcs_h
+#define Encoder_funcs_h
 
 #include <Arduino.h>
 #include <Encoder.h>
@@ -13,7 +13,6 @@ public:
     float leftspeed(int unit); // return the speeds 
     float rightspeed(int unit);
 
-    void resetEncoders();
 
 private:
     void init(int leftA, int leftB, int rightA, int rightB);
