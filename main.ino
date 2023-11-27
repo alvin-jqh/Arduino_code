@@ -12,5 +12,10 @@ void setup() {
 
 void loop() {
     // put your main code here, to run repeatedly:
+    float* speeds = Robot.speed(0);
 
+    Serial.print("Left: ");
+    Serial.print(speeds[0]);
+    Serial.print(" Right: ");
+    Serial.println(speeds[1]);
 }
