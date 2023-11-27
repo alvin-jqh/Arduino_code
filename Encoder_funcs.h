@@ -11,15 +11,18 @@ public:
     Wheels(int leftA, int leftB, int rightA, int rightB);    // initialisation
     ~Wheels();   //destructor
 
-    float* speed(int unit); // return the speeds 
+    void computeSpeeds(); // calculate speeds
     void startTimer();
-
+    float getLeftSpeed(int unit);
+    float getRightSpeed(int unit);
 
 private:
     void init(int leftA, int leftB, int rightA, int rightB);
 
     long newLeft, newRight;
     long startLeft, startRight;
+    float leftSpeed;
+    float rightSpeed;
 
     Encoder LeftEncoder;
     Encoder RightEncoder;
