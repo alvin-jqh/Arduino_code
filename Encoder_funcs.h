@@ -11,12 +11,13 @@ public:
     Wheels(int leftA, int leftB, int rightA, int rightB);    // initialisation
     ~Wheels();   //destructor
 
-    float leftspeed(int unit); // return the speeds 
-    float rightspeed(int unit);
+    float* speed(int unit); // return the speeds 
+    void startTimer();
 
 
 private:
     void init(int leftA, int leftB, int rightA, int rightB);
+
     long newLeft, newRight;
     long startLeft, startRight;
 
@@ -26,7 +27,7 @@ private:
     unsigned long deltaT; // sampling time period for speed in ms
     unsigned long startTime;
     unsigned int countsperRev;    // same for L and R
-}
+};
 
 
 
