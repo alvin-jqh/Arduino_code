@@ -1,6 +1,6 @@
 #include "Motor_funcs.h"
 
-void Motor::Motor(int directionPin, int pwmPin, int brakePin){
+Motor::Motor(int directionPin, int pwmPin, int brakePin){
     pinMode(directionPin, OUOTPUT);
     pinMode(pwmPin, OUTPUT);
     pinMode(brakePin, OUTPUT);
@@ -14,4 +14,13 @@ void Motor::Motor(int directionPin, int pwmPin, int brakePin){
 
 void Motor::drive(double pwmValue){
     analogWrite(this->pwmPin, pwmValue);
+}
+
+void Motor::changeDirection(bool direction){
+    if (direction){
+        digitalWrite(this->directionPin, HIGH); // direction really depends on left or right wheel
+    }
+    else{
+        digitalWrite(this->directionPin, LOW);
+    }
 }

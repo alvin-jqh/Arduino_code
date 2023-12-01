@@ -8,6 +8,7 @@ public:
     Motor(int directionPin, int pwmPin, int brakePin);
 
     void drive(double pwmvalue);
+    void changeDirection(bool direction);
 
 private:
     int directionPin, pwmPin, brakePin;
