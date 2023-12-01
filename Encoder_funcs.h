@@ -18,10 +18,10 @@ public:
 
 private:
 
-    volatile newLeft, newRight;
-    volatile startLeft, startRight;
-    volatile leftSpeed;
-    volatile rightSpeed;
+    volatile long newLeft, newRight;
+    volatile long startLeft, startRight;
+    volatile float leftSpeed;
+    volatile float rightSpeed;
 
     Encoder LeftEncoder;
     Encoder RightEncoder;

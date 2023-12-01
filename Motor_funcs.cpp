@@ -1,7 +1,7 @@
 #include "Motor_funcs.h"
 
 Motor::Motor(int directionPin, int pwmPin, int brakePin){
-    pinMode(directionPin, OUOTPUT);
+    pinMode(directionPin, OUTPUT);
     pinMode(pwmPin, OUTPUT);
     pinMode(brakePin, OUTPUT);
 
