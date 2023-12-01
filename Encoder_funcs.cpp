@@ -1,8 +1,9 @@
 #include "Encoder_funcs.h"
 
 Wheels::Wheels(int leftA, int leftB, int rightA, int rightB):LeftEncoder(leftA,leftB),RightEncoder(rightA,rightB){
-    this->deltaT = 100; // sampling time for the speed
+    this->deltaT = 1; // sampling time for the speed in milliseconds
     this-> countsperRev = 632;  // encoder counts per revolution
+    this->speedRatio = 20.58463;
 }
 
 Wheels::~Wheels(){
@@ -17,7 +18,7 @@ Wheels::~Wheels(){
 }
 
 void Wheels::startTimer(){
-    Serial.begin(9600);
+    // Serial.begin(9600);  only for debugging
     this->startTime = millis();
     this->startLeft = this->LeftEncoder.read();
     this->startRight = this->RightEncoder.read();
@@ -30,13 +31,13 @@ void Wheels::computeSpeeds(){
 
     if( now - this->startTime >= this->deltaT) {
 
-        this->leftSpeed = (this->newLeft - this->startLeft) / (float)(this->deltaT * 1e-3 * this->countsperRev);
-        this->rightSpeed = (this->newRight - this->startRight) / (float)(this->deltaT * 1e-3 * this->countsperRev);
+        this->leftSpeed = (this->newLeft - this->startLeft) / (float)(this->deltaT * 1e-3 * this->countsperRev * this->speedRatio);
+        this->rightSpeed = (this->newRight - this->startRight) / (float)(this->deltaT * 1e-3 * this->countsperRev * this->speedRatio);
 
-        Serial.print("Left Speed: ");
-        Serial.print(this->leftSpeed);
-        Serial.print("  Right Speed: ");
-        Serial.println(this->rightSpeed);
+        // Serial.print("Left Speed: ");    only for debugging
+        // Serial.print(this->leftSpeed);
+        // Serial.print("  Right Speed: ");
+        // Serial.println(this->rightSpeed);
 
         this->startTime = now;
         this->startLeft = this->newLeft;

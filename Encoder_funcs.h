@@ -18,10 +18,10 @@ public:
 
 private:
 
-    long newLeft, newRight;
-    long startLeft, startRight;
-    float leftSpeed;
-    float rightSpeed;
+    volatile newLeft, newRight;
+    volatile startLeft, startRight;
+    volatile leftSpeed;
+    volatile rightSpeed;
 
     Encoder LeftEncoder;
     Encoder RightEncoder;
@@ -29,6 +29,7 @@ private:
     unsigned long deltaT; // sampling time period for speed in ms
     unsigned long startTime;
     unsigned int countsperRev;    // same for L and R
+    float speedRatio;
 };
 
 
