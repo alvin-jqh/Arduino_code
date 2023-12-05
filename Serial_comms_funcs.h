@@ -5,6 +5,7 @@
 class Comms{
 public:
     Comms();
+    ~Comms();
 
     // listen for new data basically combine everything
     void listen();
@@ -19,7 +20,8 @@ public:
 
 private:
     const byte numChars;
-    char receivedChars;
+    char *receivedChars;
+    char *tempChars;
 
     // checks if any newData has been received
     bool newData;
