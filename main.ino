@@ -31,8 +31,8 @@ void setup() {
     inputL = 0;
     inputR = 0;
 
-    setPointL = -1;
-    setPointR = -1;
+    setPointL = 0;
+    setPointR = 0;
 
     leftCTL.SetMode(AUTOMATIC);
     rightCTL.SetMode(AUTOMATIC);
@@ -45,6 +45,12 @@ void setup() {
 }
 
 void loop() {
+    Line.listen();
+    if (setPointL != Line.getLeft() || setPointR != Line.getRight()){
+        setPointL = Line.getLeft();
+        setPointR = Line.getRight();
+    }
+
     if (setPointL > 0){
         LMotor.changeDirection(true);
         leftCTL.SetControllerDirection(DIRECT);
@@ -79,4 +85,5 @@ void loop() {
 
     LMotor.drive(outputL);
     RMotor.drive(outputR);
+    
 }

@@ -18,6 +18,9 @@ public:
 
     void showParsedData(); 
 
+    double getLeft();
+    double getRight();
+
 private:
     const byte numChars;
     char *receivedChars;

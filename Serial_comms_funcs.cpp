@@ -81,3 +81,11 @@ void Comms::showParsedData(){
     Serial.print("Right ");
     Serial.println(rightSpeed);
 }
+
+double Comms::getLeft(){
+    return this->leftSpeed;
+}
+
+double Comms::getRight(){
+    return this->rightSpeed;
+}
