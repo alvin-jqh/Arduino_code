@@ -5,6 +5,7 @@
 class Motor
 {
 public:
+    // intialise with 3 control pins for the motor shield
     Motor(int directionPin, int pwmPin, int brakePin);
 
     void drive(double pwmvalue);

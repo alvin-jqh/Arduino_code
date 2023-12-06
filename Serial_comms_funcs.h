@@ -4,7 +4,9 @@
 
 class Comms{
 public:
+    // constructor 
     Comms();
+    // deconstructor
     ~Comms();
 
     // listen for new data basically combine everything
@@ -16,8 +18,10 @@ public:
     // data conversion function
     void parseData();
 
+    // display function in the serial 
     void showParsedData(); 
 
+    // returns the received data
     double getLeft();
     double getRight();
 

@@ -17,6 +17,7 @@ Wheels::~Wheels(){
     ~this->countsperRev;
 }
 
+// intialises the values for start time and first left and right positions
 void Wheels::startTimer(){
     // Serial.begin(9600);  only for debugging
     this->startTime = millis();
@@ -24,6 +25,7 @@ void Wheels::startTimer(){
     this->startRight = this->RightEncoder.read();
 }
 
+// calculates the speeds for both encoders
 void Wheels::computeSpeeds(){
     unsigned long now = millis();
     this->newLeft = this->LeftEncoder.read();
@@ -45,6 +47,7 @@ void Wheels::computeSpeeds(){
     }
 }
 
+// returns left wheel speed
 float Wheels::getLeftSpeed(bool unit){
     if(unit){
         return this->leftSpeed; // this is in revolutions per second
@@ -54,6 +57,7 @@ float Wheels::getLeftSpeed(bool unit){
     }
 }
 
+// returns right wheel speed
 float Wheels::getRightSpeed(bool unit){
     if(unit){
         return this->rightSpeed; // this is in revolutions per second

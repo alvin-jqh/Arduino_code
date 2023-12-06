@@ -46,11 +46,14 @@ void setup() {
 
 void loop() {
     Line.listen();
+
+    // if a new speed is received update the set points
     if (setPointL != Line.getLeft() || setPointR != Line.getRight()){
         setPointL = Line.getLeft();
         setPointR = Line.getRight();
     }
 
+    // direction switching
     if (setPointL > 0){
         LMotor.changeDirection(true);
         leftCTL.SetControllerDirection(DIRECT);
@@ -69,6 +72,7 @@ void loop() {
         rightCTL.SetControllerDirection(REVERSE);
     }
 
+    // read the speeds from the encoders
     Encoders.computeSpeeds();
     leftSpeed = Encoders.getLeftSpeed(true);
     rightSpeed = Encoders.getRightSpeed(true);
@@ -77,6 +81,7 @@ void loop() {
     Serial.print("  Right ");
     Serial.println(rightSpeed);
 
+    // changing the pwm value to drive the motors to desired speed
     inputL = leftSpeed;
     inputR = rightSpeed;
 
