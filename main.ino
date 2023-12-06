@@ -9,7 +9,7 @@ Motor LMotor(12,3,9);
 Motor RMotor(13,11,8);
 
 // set up both encoders
-Wheels Encoders(19,18,20,21);
+Wheels Encoders(18,19,20,21);
 
 // set up Serial Comms
 Comms Line;
@@ -23,34 +23,60 @@ volatile double leftSpeed, rightSpeed;
 
 double Kp = 17, Ki = 600, Kd = 0;
 
-PID leftCTL(&inputL, &outputL, %setPointL, Kp, Ki, Kd, DIRECT);
-PID righttCTL(&inputR, &outputR, %setPointR, Kp, Ki, Kd, DIRECT);
+PID leftCTL(&inputL, &outputL, &setPointL, Kp, Ki, Kd, DIRECT);
+PID rightCTL(&inputR, &outputR, &setPointR, Kp, Ki, Kd, DIRECT);
 
 void setup() {
     // put your setup code here, to run once:
     inputL = 0;
     inputR = 0;
 
-    setPointL = 1;
-    setPointR = 1;
+    setPointL = -1;
+    setPointR = -1;
+
+    leftCTL.SetMode(AUTOMATIC);
+    rightCTL.SetMode(AUTOMATIC);
+    
+    leftCTL.SetSampleTime(5);
+    rightCTL.SetSampleTime(5);
 
     Serial.begin(9600);
-    Encoders.startTimer;
+    Encoders.startTimer();
 }
 
 void loop() {
     if (setPointL > 0){
-        LMotor.changeDirection(false);
+        LMotor.changeDirection(true);
+        leftCTL.SetControllerDirection(DIRECT);
     }
     else{
-        LMotor.changeDirection(true);
+        LMotor.changeDirection(false);
+        leftCTL.SetControllerDirection(REVERSE);
     }
 
     if (setPointR > 0){
         RMotor.changeDirection(true);
+        rightCTL.SetControllerDirection(DIRECT);
     }
     else{
         RMotor.changeDirection(false);
+        rightCTL.SetControllerDirection(REVERSE);
     }
 
+    Encoders.computeSpeeds();
+    leftSpeed = Encoders.getLeftSpeed(true);
+    rightSpeed = Encoders.getRightSpeed(true);
+    Serial.print("Left ");
+    Serial.print(leftSpeed);
+    Serial.print("  Right ");
+    Serial.println(rightSpeed);
+
+    inputL = leftSpeed;
+    inputR = rightSpeed;
+
+    leftCTL.Compute();
+    rightCTL.Compute();
+
+    LMotor.drive(outputL);
+    RMotor.drive(outputR);
 }
