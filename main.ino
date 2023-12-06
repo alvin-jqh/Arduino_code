@@ -3,24 +3,28 @@
 #include "Motor_funcs.h"
 #include <PID_v1.h>
 
-Wheels Robot(18,19,20,21);
 Motor LMotor(12,3,9);
-volatile float leftSpeed, rightSpeed;
-float setSpeeds[2];
+Motor RMotor(13,11,8);
 
-double Kp = 15, Ki = 600, Kd = 0;
-PID leftCTL();
-
+bool direction;
 void setup() {
     // put your setup code here, to run once:
-    Robot.startTimer();   // start the clock
 
 }
 
 void loop() {
-
-    // put your main code here, to run repeatedly:
-    Robot.computeSpeeds();
-    leftSpeed = Robot.getLeftSpeed(false);
-    rightSpeed = Robot.getRightSpeed(false);
+    if (direction){
+        LMotor.changeDirection(true);
+        RMotor.changeDirection(false);
+    }
+    else{
+        LMotor.changeDirection(false);
+        RMotor.changeDirection(true);
+    }
+    LMotor.drive(100);
+    RMotor.drive(100);
+    
+    delay(2000);
+    
+    direction = !direction;
 }

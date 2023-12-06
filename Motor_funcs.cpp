@@ -12,10 +12,12 @@ Motor::Motor(int directionPin, int pwmPin, int brakePin){
     digitalWrite(brakePin, LOW);
 }
 
+// enter PWM value
 void Motor::drive(double pwmValue){
     analogWrite(this->pwmPin, pwmValue);
 }
 
+// true is high, false is low
 void Motor::changeDirection(bool direction){
     if (direction){
         digitalWrite(this->directionPin, HIGH); // direction really depends on left or right wheel
