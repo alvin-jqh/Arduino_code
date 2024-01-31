@@ -21,6 +21,9 @@ public:
     // display function in the serial 
     void showParsedData(); 
 
+    // sends speed data
+    void sendData(double measuredLeft, double measuredRight, bool proximity_flag);
+
     // returns the received data
     double getLeft();
     double getRight();

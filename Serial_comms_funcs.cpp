@@ -1,5 +1,6 @@
 #include "Serial_comms_funcs.h"
 
+// any data that is sent must be in the form "<leftSpeed, rightSpeed>"
 Comms::Comms():numChars(32){
     this->receivedChars = new char[numChars + 1];
     this->tempChars = new char[numChars + 1];
@@ -80,6 +81,17 @@ void Comms::showParsedData(){
     Serial.println(leftSpeed);
     Serial.print("Right ");
     Serial.println(rightSpeed);
+}
+
+// sending back the measured speeds of the left and right motors in the same form
+void sendData(double measuredLeft, double measuredRight, bool proximity_flag = false){
+    Serial.print("<");
+    Serial.print(measuredLeft);
+    Serial.print(", ");
+    Serial.print(measuredRight);
+    Serial.print(",");
+    Serial.print(proximity_flag);
+    Serial.println(">");
 }
 
 double Comms::getLeft(){

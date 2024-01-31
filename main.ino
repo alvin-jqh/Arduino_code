@@ -38,6 +38,7 @@ void setup() {
     rightCTL.SetMode(AUTOMATIC);
     
     leftCTL.SetSampleTime(5);
+
     rightCTL.SetSampleTime(5);
 
     Serial.begin(9600);
