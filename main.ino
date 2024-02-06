@@ -23,6 +23,8 @@ volatile double leftSpeed, rightSpeed;
 
 double Kp = 17, Ki = 600, Kd = 0;
 
+bool proximity_flag = false;
+
 PID leftCTL(&inputL, &outputL, &setPointL, Kp, Ki, Kd, DIRECT);
 PID rightCTL(&inputR, &outputR, &setPointR, Kp, Ki, Kd, DIRECT);
 
@@ -77,10 +79,8 @@ void loop() {
     Encoders.computeSpeeds();
     leftSpeed = Encoders.getLeftSpeed(true);
     rightSpeed = Encoders.getRightSpeed(true);
-    Serial.print("Left ");
-    Serial.print(leftSpeed);
-    Serial.print("  Right ");
-    Serial.println(rightSpeed);
+    
+    Line.sendData(leftSpeed, rightSpeed, proximity_flag);
 
     // changing the pwm value to drive the motors to desired speed
     inputL = leftSpeed;

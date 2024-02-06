@@ -84,10 +84,10 @@ void Comms::showParsedData(){
 }
 
 // sending back the measured speeds of the left and right motors in the same form
-void sendData(double measuredLeft, double measuredRight, bool proximity_flag = false){
+void Comms::sendData(double measuredLeft, double measuredRight, bool proximity_flag = false){
     Serial.print("<");
     Serial.print(measuredLeft);
-    Serial.print(", ");
+    Serial.print(",");
     Serial.print(measuredRight);
     Serial.print(",");
     Serial.print(proximity_flag);
