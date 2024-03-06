@@ -57,7 +57,7 @@ void loop() {
     }
 
     // direction switching
-    if (setPointL > 0){
+    if (setPointL >= 0){
         LMotor.changeDirection(true);
         leftCTL.SetControllerDirection(DIRECT);
     }
@@ -66,7 +66,7 @@ void loop() {
         leftCTL.SetControllerDirection(REVERSE);
     }
 
-    if (setPointR > 0){
+    if (setPointR >= 0){
         RMotor.changeDirection(true);
         rightCTL.SetControllerDirection(DIRECT);
     }
@@ -89,7 +89,18 @@ void loop() {
     leftCTL.Compute();
     rightCTL.Compute();
 
-    LMotor.drive(outputL);
-    RMotor.drive(outputR);
+    if (setPointL == 0) {
+        LMotor.drive(0);
+    }
+    else{
+        LMotor.drive(outputL);
+    }
+    
+    if (setPointR == 0) {
+        RMotor.drive(0);
+    }
+    else{
+        RMotor.drive(outputR);
+    }
     
 }
